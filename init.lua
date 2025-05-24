@@ -5,6 +5,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
 
 Plug'nvim-lua/plenary.nvim'
+Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug'nvim-telescope/telescope.nvim'
 Plug'rose-pine/neovim'
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
@@ -23,8 +24,8 @@ Plug'mason-org/mason.nvim'
 Plug'mason-org/mason-lspconfig.nvim'
 Plug'L3MON4D3/LuaSnip'
 Plug'rafamadriz/friendly-snippets'
-Plug'ThePrimeagen/vim-be-good'
 Plug'nvim-lua/plenary.nvim'
 Plug('ThePrimeagen/harpoon', { ['branch'] = 'harpoon2' })
 
 vim.call('plug#end')
+
