@@ -8,7 +8,8 @@ local builtin = require('telescope.builtin')
 
 -- Key mapping to find files, including hidden ones
 vim.keymap.set('n', '<leader>pf', function()
-    builtin.find_files({ hidden = true })  -- Set hidden to true
+    local path = vim.fn.expand("%:p:h")
+    builtin.find_files({ hidden = true, cwd = path })  -- Show hidden AND current working directory
 end, {})
 
 -- Key mapping for git files or regular files based on the current directory

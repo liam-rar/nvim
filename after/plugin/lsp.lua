@@ -20,33 +20,17 @@ local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'ts_ls', 'rust_analyzer'},
+  ensure_installed = {
+      'rust_analyzer'
+  },
   handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup({
-        capabilities = lsp_capabilities,
-      })
-    end,
-    lua_ls = function()
-      require('lspconfig').lua_ls.setup({
-        capabilities = lsp_capabilities,
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT'
-            },
-            diagnostics = {
-              globals = {'vim'},
-            },
-            workspace = {
-              library = {
-                vim.env.VIMRUNTIME,
-              }
-            }
-          }
-        }
-      })
-    end,
+      function (server_name) --default handler (optional)
+          print("setting up ", server_name)
+          require("lspconfig")[server_name].setup {}
+      end,
+      ["rust_analyzer"] = function()
+          require("rust-tools").setup {}
+      end,
   }
 })
 
@@ -55,8 +39,9 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 cmp.setup({
   sources = cmp.config.sources({
-    {name = 'nvim_lsp'},  
-    {name = 'luasnip'},  
+    {name = 'nvim_lsp'},
+    {name = 'luasnip'},
+    {name = 'rust_analyzer'},
   }, {
     {name = 'buffer'},
   }),
