@@ -1,9 +1,9 @@
-require("theprimeagen.set")
-require("theprimeagen.remap")
-require("theprimeagen.lazy_init")
+require("liam.set")
+require("liam.remap")
+require("liam.lazy_init")
 
 local augroup = vim.api.nvim_create_augroup
-local ThePrimeagenGroup = augroup('ThePrimeagen', {})
+local liam = augroup('liam', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -30,13 +30,13 @@ autocmd('TextYankPost', {
 })
 
 autocmd({"BufWritePre"}, {
-    group = ThePrimeagenGroup,
+    group = liam,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
 
 autocmd('BufEnter', {
-    group = ThePrimeagenGroup,
+    group = liam,
     callback = function()
         if vim.bo.filetype == "zig" then
             vim.cmd.colorscheme("tokyonight-night")
@@ -48,7 +48,7 @@ autocmd('BufEnter', {
 
 
 autocmd('LspAttach', {
-    group = ThePrimeagenGroup,
+    group = liam,
     callback = function(e)
         local opts = { buffer = e.buf }
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
@@ -63,7 +63,3 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     end
 })
-
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
