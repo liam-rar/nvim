@@ -1,14 +1,3 @@
-local root_files = {
-  '.luarc.json',
-  '.luarc.jsonc',
-  '.luacheckrc',
-  '.stylua.toml',
-  'stylua.toml',
-  'selene.toml',
-  'selene.yml',
-  '.git',
-}
-
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -44,7 +33,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "tsserver",
                 "gopls",
             },
             handlers = {
@@ -89,6 +77,11 @@ return {
                         }
                     }
                 end,
+                ["rust_analyzer"] = function()
+                    local lspconfig = require("lspconfig")
+                lspconfig.rust_analyzer.setup {
+                    }
+                end,
             }
         })
 
@@ -116,7 +109,11 @@ return {
         })
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
+           virtual_text = {
+                show_source = "true",
+                prefix = "-",
+            },
+             update_in_insert = true,
             float = {
                 focusable = false,
                 style = "minimal",
@@ -126,5 +123,5 @@ return {
                 prefix = "",
             },
         })
-    end
+    end,
 }

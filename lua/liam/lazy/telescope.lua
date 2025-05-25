@@ -24,7 +24,7 @@ return {
             if is_git then
                 builtin.git_files({ cwd = path })
             else
-                builtin.find_files()
+                builtin.find_files({ hidden = true, cws = path })
             end
         end)
         vim.keymap.set('n', '<leader>pws', function()
