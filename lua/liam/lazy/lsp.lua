@@ -12,6 +12,7 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        "saghen/blink.cmp",
     },
 
     config = function()
@@ -42,22 +43,7 @@ return {
                     }
                 end,
 
-                zls = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.zls.setup({
-                        root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                        settings = {
-                            zls = {
-                                enable_inlay_hints = true,
-                                enable_snippets = true,
-                                warn_style = true,
-                            },
-                        },
-                    })
-                    vim.g.zig_fmt_parse_errors = 0
-                    vim.g.zig_fmt_autosave = 0
-
-                end,
+                -- Lua lspconfig
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
@@ -77,11 +63,27 @@ return {
                         }
                     }
                 end,
+
+                -- rust_analyzer lspconfig
                 ["rust_analyzer"] = function()
                     local lspconfig = require("lspconfig")
                 lspconfig.rust_analyzer.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            Lua = {
+                                format = {
+                                    enable = true,
+                                    -- Put format options here
+                                    defaultConfig = {
+                                        indent_style = "space",
+                                        indent_size = "2",
+                                    }
+                                },
+                            }
+                        }
                     }
                 end,
+
             }
         })
 
@@ -100,7 +102,6 @@ return {
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
-                { name = "copilot", group_index = 2 },
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' }, -- For luasnip users.
             }, {
@@ -112,6 +113,12 @@ return {
            virtual_text = {
                 show_source = "true",
                 prefix = "-",
+                severity = { min =
+                    vim.diagnostic.severity.ERROR,
+                 -- vim.diagnostic.severity.WARN,
+                    vim.diagnostic.severity.INFO,
+                    vim.diagnostic.severity.HINT,
+                },
             },
              update_in_insert = true,
             float = {
