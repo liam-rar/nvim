@@ -34,18 +34,12 @@ autocmd({"BufWritePre"}, {
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
-
 autocmd('BufEnter', {
     group = liam,
     callback = function()
-        if vim.bo.filetype == "zig" then
-            vim.cmd.colorscheme("tokyonight-night")
-        else
-            vim.cmd.colorscheme("rose-pine-moon")
-        end
+        vim.cmd.colorscheme("rose-pine")
     end
 })
-
 
 autocmd('LspAttach', {
     group = liam,

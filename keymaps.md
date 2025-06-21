@@ -8,8 +8,8 @@
 
     "n", "<leader>tf", "PlenaryTestFile"
     "n", "J" -- join lower line with current
-    "n", "<C-d>" -- jump down
-    "n", "<C-u>" -- jump up
+    "n", "<C-d>" -- jump down half a page
+    "n", "<C-u>" -- jump up half a page
 
     "n", "n", "nzzzv")
     "n", "N", "Nzzzv")

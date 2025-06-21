@@ -62,7 +62,6 @@ return {
         vim.treesitter.language.register("templ", "templ")
     end
     },
-
     {
         "nvim-treesitter/nvim-treesitter-context",
         after = "nvim-treesitter",
