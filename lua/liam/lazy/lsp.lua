@@ -9,8 +9,8 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
+        "L3MON4D3/LuaSnip",
         "j-hui/fidget.nvim",
         "saghen/blink.cmp",
     },
@@ -114,7 +114,7 @@ return {
                 prefix = "-",
                 severity = { min =
                     vim.diagnostic.severity.ERROR,
-                 -- vim.diagnostic.severity.WARN,
+                    vim.diagnostic.severity.WARN,
                     vim.diagnostic.severity.INFO,
                     vim.diagnostic.severity.HINT,
                 },
